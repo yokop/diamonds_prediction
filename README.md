@@ -2,26 +2,27 @@
 
 Overview
 --------
-Web application That enables to predict diamonds price
+Web application that enables to predict diamonds price.
 it is based on Django framework and uses sqlite as DB.
 during initialization, the application takes the diamonds dataset from seaborn module and
 loads it to sqlite DB
 
 User can:
 1. Load new data from dedicated service (http://sdkdata.eastus.azurecontainer.io/model/getdiamonds)
-2. fit the model to be alligned with the up to date data
-3. predict price of diamond by supplying its feature
-4. give feedback for the prediction 
-5. see table with all the up to date dataset
+2. Fit the model to be alligned with the up to date data
+3. Predict price of diamond by supplying its feature
+4. Give feedback for the prediction 
+5. See table with all the up-to-date dataset
 
 Admin user can:
-1. see logs for all actions that were done
-2. see all the predictions + their feedback from user
+1. See logs for all actions that were done
+2. See all the predictions + their feedback from user
 
+sqlite file is in repository and is already initaited with makemigrations and migrate
 
-installation and execution instructions:
+Installation and execution instructions:
 ----------------------------------------
-to run on local machine:
+To run on local machine:
 ------------------------
 1.  git clone https://github.com/yokop/diamonds_prediction.git
 2.  pip install virtualenv
@@ -32,7 +33,7 @@ to run on local machine:
 7.  python manage.py runserver
 8.  via browser: http://127.0.0.1:8000/
 
-to run with docker:
+To run with docker:
 -------------------
 sudo docker build . -t diamonds_app:v1
 sudo docker run -p 8000 -t diamonds_app:v1
