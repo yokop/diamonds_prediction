@@ -1,0 +1,119 @@
+{% extends 'diamonds/base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+<div class="col-md-12 text-center">
+    <h5 id=info_str class="text-danger">{{info_str}}</h5>
+
+    <button id="dataset_load_btn" type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" data-html="true" title="update dataset with the resource's new data">Load New Records</button>
+    <!-- <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" data-html="true" title="update one recorde manualy">Add Record</button> -->
+</div>  
+</div>
+
+{% if diamonds_dataset.has_other_pages %}
+<ul class="pagination   justify-content-center">
+  {% if diamonds_dataset.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page={{ diamonds_dataset.previous_page_number }}" >&laquo;</a></li>
+  {% else %}
+    <li class="disabled page-item"><a class="page-link" href="#" >&laquo;</a></li>
+  {% endif %}
+  {% for i in pages_range %}
+    {% if diamonds_dataset.number == i %}
+      <li class="active page-item"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+    {% else %}
+      <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
+  {% endfor %}
+  {% if diamonds_dataset.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{ diamonds_dataset.next_page_number }}">&raquo;</a></li>
+  {% else %}
+    <li class="disabled page-item" ><span>&raquo;</span></li>
+  {% endif %}
+</ul>
+{% endif %}
+
+<table  class="table table-dark" id="tablefdataset">
+    <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Carat</th>
+          <th scope="col">Cut</th>
+          <th scope="col">Clarity</th>
+          <th scope="col">Table</th>
+          <th scope="col">X</th>
+          <th scope="col">Y</th>
+          <th scope="col">Z</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+    <tbody>
+
+        {% for diamond in diamonds_dataset %}
+        <tr>
+          <td>{{ diamond.pk }}</td>
+          <td>{{ diamond.carat }}</td>
+          <td>{{ diamond.cut }}</td>
+          <td>{{ diamond.clarity }}</td>
+          <td>{{ diamond.table }}</td>
+          <td>{{ diamond.x }}</td>
+          <td>{{ diamond.y }}</td>
+          <td>{{ diamond.z }}</td>
+          <td>{{ diamond.price }}</td>
+        </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+
+
+
+
+
+
+
+
+
+{% csrf_token %}
+<script>
+    
+    $('#dataset_load_btn').click(function(){
+        console.log("hi ajax")
+        $.ajax(
+        {
+            url: "/ajax_load_new_dataset/",
+            dataType: 'json',
+            data:{
+                page_id: 1
+            },
+            success: function( data ) 
+            {
+                console.log("returned ajax")
+                console.log(JSON.stringify(data) )
+                $('#info_str').text(data.info)
+                
+                // var table = $('table')
+                // $.each(JSON.parse(data.data), function(i, item) {
+
+
+                //         console.log(item)
+                //         var markup = "<tr>\
+                //             <td>" + item.pk +"</td>\
+                //             <td>" + item.fields.carat +"</td>\
+                //             <td>" + item.fields.cut + "</td>\
+                //             <td>" + item.fields.clarity + "</td>\
+                //             <td>" + item.fields.table +"</td>\
+                //             <td>" + item.fields.x +"</td>\
+                //             <td>" + item.fields.y +"</td>\
+                //             <td>" + item.fields.z +"</td>\
+                //             <td>" + item.fields.price +"</td>\
+                //             </tr>";
+                //         $('#tablefdataset tbody').append(markup)
+
+                // });
+            }
+     })
+    });
+</script>
+{% endblock %}

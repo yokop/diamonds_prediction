@@ -1,0 +1,18 @@
+{% extends 'diamonds/base.html' %}
+
+{% block content %}
+
+<div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 mx-auto text-center form p-4">
+
+
+<h1 class="text-left text-danger" >Predict</h1>
+<br>
+<h2 class="text-center" >{{error}}</h2>
+<form method="POST" class="text-left ">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-primary">Predict</button>
+</form>
+</div>
+
+{% endblock %}

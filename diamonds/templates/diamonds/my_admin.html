@@ -1,0 +1,31 @@
+{% extends 'diamonds/base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="text-center col-21 text-danger">
+    <h1>
+       Admin Page
+    </h1>
+</div>
+
+<br>
+<br>
+<br>
+
+<div class="col-md-12 text-center">
+    <a class="btn btn-primary" href="/my_admin_predicted_items">Predicted Items</a>
+</div>
+<br>
+<br>
+<div class="col-md-12 text-center">
+    <a class="btn btn-primary" href="/my_admin_log">Log</a>
+</div>
+
+
+{% else %}
+<div class="text-center text-danger">
+    <h1>In order to see the predictions and feedbacks <br>Please login as <br><br> User Name:root<br>Password:123456</h1>
+</div>
+{% endif %}
+{% endblock %}

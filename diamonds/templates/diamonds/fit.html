@@ -1,0 +1,40 @@
+{% extends 'diamonds/base.html' %}
+
+{% block content %}
+
+<div class="col-md-12 text-center">
+
+
+<h1 class="text-danger" >Fit the Model</h1>
+<br>
+<h2 class="text-center text-danger" id="info_str" ></h2>
+<div class="col-md-12 text-center">
+<h2 class="text-center" >{{error}}</h2>
+<br>
+<div class="col-md-12 text-center">
+    <button class="btn btn-primary" id="fit_button">Fit</button> 
+</div>
+</div>
+
+
+
+<script>
+    
+    $('#fit_button').click(function(){
+        console.log("hi ajax")
+        $('#info_str').text("Working on it...")
+        $.ajax(
+        {
+            url: "/ajax_fit/",
+            dataType: 'json',
+            success: function( data ) 
+            {
+                console.log("returned ajax")
+                console.log(JSON.stringify(data) )
+                $('#info_str').text(data["info"])
+            }
+     })
+    });
+</script>
+
+{% endblock %}

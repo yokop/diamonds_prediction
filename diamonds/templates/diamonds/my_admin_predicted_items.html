@@ -1,0 +1,56 @@
+{% extends 'diamonds/base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="text-center">
+    <br>  <h1 class="text-danger">All Predicted Items + Feedback from User</h1><br>
+</div>
+<table  class="table table-dark" id="tablefpredicteditems">
+    <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Predicted Price</th>
+          <th scope="col">Feedbacked Price</th>
+          <th scope="col">Feedbeck</th>
+          <th scope="col">Is Loded into dataset</th>
+          <th scope="col">Carat</th>
+          <th scope="col">Cut</th>
+          <th scope="col">Clarity</th>
+          <th scope="col">Table</th>
+          <th scope="col">X</th>
+          <th scope="col">Y</th>
+          <th scope="col">Z</th>
+        </tr>
+      </thead>
+    <tbody>
+
+        {% for predicted in predicted_dataset %}
+        <tr>
+            <td>{{ predicted.created }}</td>
+            <td>{{ predicted.price_predicted }}</td>
+            <td>{{ predicted.real_price_feedback }}</td>
+            <td>{{ predicted.price_feedback }}</td>
+            <td>{{ predicted.imported_to_dataset }}</td>
+            <td>{{ predicted.carat }}</td>
+            <td>{{ predicted.cut }}</td>
+            <td>{{ predicted.clarity }}</td>
+            <td>{{ predicted.table }}</td>
+            <td>{{ predicted.x }}</td>
+            <td>{{ predicted.y }}</td>
+            <td>{{ predicted.z }}</td>
+        </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+
+
+
+{% else %}
+<div class="text-center text-danger">
+    <h1>In order to see the predictions and feedbacks <br>Please login as <br><br> User Name:root<br>Password:123456</h1>
+</div>
+{% endif %}
+{% endblock %}

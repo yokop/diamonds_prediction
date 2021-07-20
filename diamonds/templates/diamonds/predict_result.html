@@ -1,0 +1,47 @@
+{% extends 'diamonds/base.html' %}
+
+{% block content %}
+<h1>
+    <div class="text-center text-danger">
+        Price is {{prediction.price_predicted}}
+    </div>
+</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="text-center col-8">
+        <table  class="table w-auto table-bordered center"  id="table_features" style="margin: 0 auto;">
+            <thead>
+                <tr>
+                  <th scope="col">Feature</th>
+                  <th scope="col">Value</th>
+                </tr>
+              </thead>
+            <tbody>
+                <tr><td>carat</td><td>{{prediction.carat}}</td></tr>
+                <tr><td>cut</td><td>{{prediction.cut}}</td></tr>
+                <tr><td>color</td><td>{{prediction.color}}</td></tr>
+                <tr><td>clarity</td><td>{{prediction.clarity}}</td></tr>
+                <tr><td>depth</td><td>{{prediction.depth}}</td></tr>
+                <tr><td>table</td><td>{{prediction.table}}</td></tr>
+                <tr><td>x</td><td>{{prediction.x}}</td></tr>
+                <tr><td>y</td><td>{{prediction.y}}</td></tr>
+                <tr><td>z</td><td>{{prediction.z}}</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col">
+                <h3 class="text-danger">Do you think otherwise?</h3>
+                <form method="POST" class="text-left">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button type="submit" class="btn btn-primary">Send Feedback</button>
+                </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

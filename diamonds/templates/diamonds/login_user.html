@@ -1,0 +1,52 @@
+{% extends 'diamonds/base.html' %}
+{% block content %}
+
+<!-- <h1>Login</h1> -->
+<!-- <h2>{{ err }}</h2> -->
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5 ">
+        <h2>login</h2>
+    </div>
+</div>
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        {% if err %}
+            <div class="alert alert-danger" role="alert">
+                {{ err }}
+            </div>
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">User Name</label>
+                <input type="text" name="username" class="form-control" id="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" id="password">
+            </div>
+            <button type="submit" class="btn btn-primary">Log In</button>
+        </form>
+        <hr>
+        <div class="text-center">
+        Don't have account<a href="{% url 'signup_user' %}"> Sign up Here</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- <form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Login</button>
+</form> -->
+
+{% endblock %}
