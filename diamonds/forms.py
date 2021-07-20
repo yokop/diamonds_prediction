@@ -1,12 +1,13 @@
 from django.forms import ModelForm
 from .models import Diamond,Diamond_predicted
 
+# form for predict page
 class Diamond_prediction_form(ModelForm):
     class Meta:
         model = Diamond
         fields = ['carat','cut','color','clarity','depth','table','x','y','z']
 
-
+# form for predicts feedback
 class Diamond_prediction_feedback_form(ModelForm):
     class Meta:
         model = Diamond_predicted

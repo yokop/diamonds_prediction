@@ -37,9 +37,6 @@ urlpatterns = [
     path('my_admin_predicted_items/', views.my_admin_predicted_items, name='my_admin_predicted_items'),
     path('my_admin_log/', views.my_admin_log, name='my_admin_log'),
     
-    path('predict/feedback', views.predict_result_feedback, name='predict_result_feedback'),
-    path(r'predict/addtodataset/(?P<prediction>\d+)(?P<values>\d+)', views.predict_result_add_to_dataset, name='predict_result_add_to_dataset'),
-
     path('ajax_fit/', views.ajax_fit, name='ajax_fit'),
     path('ajax_load_new_dataset/', views.ajax_load_new_dataset, name='ajax_load_new_dataset'),
 ]

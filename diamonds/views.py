@@ -11,7 +11,6 @@ from .predictor import predict as predictor_predict
 from .models import Diamond,Diamond_predicted,MyLog
 import json
 from django.core import serializers
-from .tables import DiamondTable
 from .forms import Diamond_prediction_form,Diamond_prediction_feedback_form
 
 
@@ -183,27 +182,13 @@ def my_admin(request):
 def fit(request):
     return render(request,'diamonds/fit.html')
 
-def predict_result_feedback(request):
-    print('aaaaaaaaaaaaaa')
-    print(request)
-    print('aaaaaaaaaaaaaa')
-    return render(request, 'diamonds/predict_result_feedback.html')
-
-def predict_result_add_to_dataset(request):
-    print('aaaaaaaaaaaaaa')
-    print(request)
-    print('aaaaaaaaaaaaaa')
-    return render(request, 'diamonds/predict_result_add_to_dataset.html')
-
 def ajax_load_new_dataset(request):
     print("in ajax_load_dataset")
     if request.method == 'GET':
         records_count,pages_count = load_new_data()
         info_str = f"{records_count} Records in {pages_count} Pages"
         return JsonResponse({"info":info_str})
-        #diamonds_table = DiamondTable(the_page)
-       # return render(request,{"info":info_drom_loading,"data":diamonds_table})
-        #return HttpResponse(f"Page id is {page_id}") # Sending an success response
+
 def ajax_fit(request):
     if request.method == 'GET':
         score = predictor_fit()
