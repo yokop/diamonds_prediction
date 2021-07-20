@@ -44,6 +44,7 @@ def load_model():
             model = pickle.load(pkl_file)
             cache.set('current_model', model)
     else:
+        add_log("Warning","load_model - pkl_file_path does not exist")
         print("pkl_file_path does not exist")
         fit()
 
@@ -63,6 +64,19 @@ def predict(features):
                ).reindex(columns=columns_for_model).fillna(0).astype('int')                   
     
     model =  cache.get('current_model', None)
+    if not model:
+        add_log("Warning","model is None")
+        pkl_file_path = os.path.join(os.getcwd(),settings.PKL_FILE_NAME)
+        if not os.path.isfile(pkl_file_path):
+            add_log("Warning","No pkll - doing fit")
+            fit()
+        if os.path.isfile(pkl_file_path):
+            add_log("Warning","pkll exists - loading the model")
+            with open(pkl_file_path, 'rb') as pkl_file:  
+                model = pickle.load(pkl_file)
+        else:
+            add_log("Error","no model")
+         
     the_prediction   = model.predict(df_plus)
     print(f"prediction is {the_prediction}")
     print("predictor predict end")
