@@ -12,7 +12,6 @@ def load_df_to_db(diamonds_df):
     transaction.set_autocommit(False)
     for record in diamonds_df.to_dict('records'):
         one_diamond = Diamond(**record)
-        print(f"one_diamond= {one_diamond.cut}")
         one_diamond.save() 
     transaction.set_autocommit(True)
     transaction.commit()
