@@ -19,6 +19,7 @@ from django.urls.conf import re_path
 from diamonds import views
 from diamonds import data_loader
 from diamonds import predictor
+from django.db.utils import OperationalError
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -43,5 +44,10 @@ urlpatterns = [
     path('ajax_load_new_dataset/', views.ajax_load_new_dataset, name='ajax_load_new_dataset'),
 ]
 
-data_loader.init_dataset()
-predictor.load_model()
+## remember to remove it when doing makemigrations or migrate
+try:
+    data_loader.init_dataset()
+    predictor.load_model()
+except OperationalError:
+    pass # happens when db doesn't exist yet, views.py should be
+         # importable without this side effect
